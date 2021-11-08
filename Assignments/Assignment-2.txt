@@ -1,0 +1,38 @@
+#for input use:
+#inputString = input()
+
+def find_animal(grid,maximum):
+    for i in range(len(grid)):
+        for j in range(len(grid)):
+            if(grid[i][j] == 'T'):
+                count = 1
+                m = dfs(i,j,grid,count)
+                if(maximum < m):
+                    maximum = m
+    return maximum
+                
+    
+def dfs(row,column,grid,count):
+    grid[row][column] = 'W'
+    rowVector = [-1,0,1,0]
+    colVector = [0,1,0,-1]
+    for i in range(len(rowVector)):
+        if(canMove(row+rowVector[i],column+colVector[i],grid)):
+            count += 1
+            count = dfs(row+rowVector[i],column+colVector[i],grid,count)
+    return count
+        
+def canMove(row,column,grid):
+    if(row >= 0 and column >= 0 and row < len(grid) and column < len(grid[0]) and grid[row][column] != 'W'):
+        return True
+    else:
+        return False
+    
+# Main Code
+N = int(input())
+grid = []
+for i in range(N):
+    grid.append(list(input().split()))
+maximum = -1
+
+print(find_animal(grid,maximum))
