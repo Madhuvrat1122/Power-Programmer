@@ -1,0 +1,18 @@
+#for input use:
+#inputString = input()
+def occurance(S,N,K):
+    res = ""
+    for i in S:
+        if i not in res:
+            res += i
+        else:
+            if res.count(i) < K:
+                res += i
+    return res
+    
+#Main Code
+T = int(input())
+for i in range(T):
+    N,K = map(int,input().split(" "))
+    S = input()
+    print(occurance(S,N,K))
