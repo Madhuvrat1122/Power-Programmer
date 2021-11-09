@@ -1,0 +1,16 @@
+def lexicographical(S,K):
+    if K == 1:
+        S1 = S+S
+        res = S
+        for i in range(len(S)):
+            res = min(res,S1[i:i+len(S)])
+        return res
+    return "".join(sorted(list(S)))
+    
+#Main Code
+N = int(input())
+for i in range(N):
+    inp = input().split(" ")
+    K = int(inp[0])
+    S = inp[1]
+    print(lexicographical(S,K))
