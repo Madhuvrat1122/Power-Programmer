@@ -1,0 +1,53 @@
+****************Using Dp(Failing For 2 Test cases)***************************************************
+
+def game(x,y,n,w,p1,p2):
+    dp = [[0 for j in range(w+1)]for i in range(n+1)]
+    for i in range(0,n+1):
+        dp[i][0] = 1
+        
+    for i in range(1,w+1):
+        dp[0][i] = 0
+   
+    for i in range(1,n+1):
+        for j in range(1,w+1):
+            op1 = dp[i-1][max(j-x,0)]*p1 + dp[i-1][j]*(1-p1)
+            op2 = dp[i-1][max(j-y,0)]*p2 + dp[i-1][j]*(1-p2)
+            dp[i][j] = max(op1,op2)
+            
+    return dp[n][w]
+
+#Main Code
+N = int(input())
+for i in range(N):
+    x,y,n,w,p1,p2 = map(int,input().split(" "))
+    print("{:.6f}".format(game(x,y,n,w,p1/100,p2/100)*100))
+
+
+****************Using Recursion(Passing All Test cases)***************************************************
+
+#for input use:
+#inputString = input()
+def game(chance,cur_score,x,y,n,w,p1,p2,visited,dp):
+    if cur_score > w:
+        cur_score = w
+    if visited[chance][cur_score] == 1:
+        return dp[chance][cur_score]
+    visited[chance][cur_score] = 1
+    if chance == n:
+        if cur_score == w:
+            dp[chance][cur_score] = 1
+        else:
+            dp[chance][cur_score] = 0
+        return dp[chance][cur_score]
+    op1 = game(chance+1,cur_score+x,x,y,n,w,p1,p2,visited,dp)*p1 + game(chance+1,cur_score,x,y,n,w,p1,p2,visited,dp)*(1-p1)
+    op2 = game(chance+1,cur_score+y,x,y,n,w,p1,p2,visited,dp)*p2 + game(chance+1,cur_score,x,y,n,w,p1,p2,visited,dp)*(1-p2)
+    dp[chance][cur_score] = max(op1,op2)
+    return dp[chance][cur_score]
+
+#Main Code
+N = int(input())
+for i in range(N):
+    x,y,n,w,p1,p2 = map(int,input().split(" "))
+    visited = [[0 for j in range(w+1)]for i in range(n+1)]
+    dp = [[0 for j in range(w+1)]for i in range(n+1)]
+    print("{:.6f}".format(game(0,0,x,y,n,w,p1/100,p2/100,visited,dp)*100))
