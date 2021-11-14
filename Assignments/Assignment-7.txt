@@ -1,0 +1,28 @@
+************************(Using Boundary Sweap Algorithm)*******************************************
+
+import heapq
+def assign7(s):
+    s.sort()
+    H = []  #Min Heap
+    minimum_sweets = -1
+    maximum_students = 0
+    for i in range(len(s)):
+        heapq.heappush(H,s[i][1])
+        while H[0] < s[i][0]:
+            heapq.heappop(H)
+        if len(H) > maximum_students:
+            maximum_students = len(H)
+            minimum_sweets = s[i][0]
+    print(minimum_sweets,maximum_students)
+
+#Main Code
+n = int(input())
+lst = [0]*n
+for i in range(n):
+    x,y = map(int,input().split(" "))
+    lst[i] = (x,y)
+assign7(lst)
+
+
+_________________________________________________________________
+Explaination Video =>  https://www.youtube.com/watch?v=AKy69exa5Cc
