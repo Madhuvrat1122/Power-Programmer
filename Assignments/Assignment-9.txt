@@ -1,0 +1,17 @@
+def func(inp):
+    temp = ""
+    latest = ""
+    for i in range(len(inp)):
+        if latest == inp[i]:
+            continue
+        else:
+            temp += inp[i]
+            latest = inp[i]
+    return temp
+       
+
+
+N = int(input())
+for i in range(N):
+    inp = input()
+    print(func(inp))
