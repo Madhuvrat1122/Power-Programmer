@@ -1,0 +1,27 @@
+def Winner(andrea,maria,S):
+    if S == "Even":
+        i = 0
+    else:
+        i = 1
+    a = 0
+    m = 0
+    while(i<len(andrea)):
+        a += (andrea[i] - maria[i])
+        m += (maria[i] - andrea[i])
+        i = i + 2
+    if a > m:
+        print("Andrea")
+    elif m > a:
+        print("Maria")
+    else:
+        print("Tie")
+# Main Code
+N = int(input())
+andrea,maria = [],[]
+for i in range(N):
+    andrea.append(int(input()))
+M = int(input())
+for i in range(M):
+    maria.append(int(input()))
+S = input()
+Winner(andrea,maria,S)
