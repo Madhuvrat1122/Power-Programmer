@@ -1,0 +1,13 @@
+def convert(h,m,s,ampm):
+    if ampm == "AM":
+        if int(h) == 12:
+            h = "00"
+    else:
+        if int(h) < 12:
+            h = str(int(h) + 12)
+    print("{}:{}:{}".format(h,m,s))
+    
+#Main Code
+h,m,sampm = input().split(":")
+s,ampm = sampm[:2],sampm[2:]
+convert(h,m,s,ampm)
