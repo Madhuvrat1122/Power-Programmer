@@ -1,0 +1,22 @@
+def Sale(items,delete):
+    dict0 = {}
+    for i in items:
+        if i not in dict0:
+            dict0[i] = 1
+        else:
+            dict0[i] += 1
+    sorted_dict = dict(sorted(dict0.items(), key=lambda item: item[1]))
+    count = 0
+    for i in sorted_dict:
+        if delete >= sorted_dict[i]:
+            delete -= sorted_dict[i]
+            count += 1
+    print(len(sorted_dict)-count)
+
+# Main Code
+N = int(input())
+items = []
+for i in range(N):
+    items.append(int(input()))
+delete = int(input())
+Sale(items,delete)
